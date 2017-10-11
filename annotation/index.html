@@ -17,16 +17,24 @@
   // Complete this section and create a CSS file named style.css
     var lyrics = document.getElementById("lyrics");
     var video = document.getElementById("a_classic");
-    //video.addEventListener("timeupdate", function() {
+    video.addEventListener("timeupdate", function() {
         //timer.innerHTML = video.currentTime;
         if (video.currentTime < 10) 
         {
             lyrics.innerHTML = "<h2> Hush Hush Hush Here Comes The Bogey Man</h2>";
         }
-        else if (video.currentTime > 10 && video.currentTime < 14)
+        else if (video.currentTime > 10 && video.currentTime < 13.5)
         {
             lyrics.innerHTML = "<h2>Children have You ever met the Bogeyman before</h2>";
         }
+        else if (video.currentTime > 13.5 && video.currentTime < 17.2)
+            lyrics.innerHTML = "<h2>No, of course You haven't for You're much too good, I'm sure</h2>";
+        else if (video.currentTime > 17.2 && video.currentTime < 21.2)
+            lyrics.innerHTML = "<h2>Don't You be afraid of him if he should visit You,</h2>";
+        else if (video.currentTime > 21.2 && video.currentTime < 24.8)
+            lyrics.innerHTML = "<h2>He's a great big coward, so I'll tell You what to do</h2>";
+
+    }, false);
 
     //false);
 
