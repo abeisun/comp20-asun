@@ -15,6 +15,21 @@
 
 <script>
   // Complete this section and create a CSS file named style.css
+    var lyrics = document.getElementById("lyrics");
+    var video = document.getElementById("a_classic");
+    //video.addEventListener("timeupdate", function() {
+        //timer.innerHTML = video.currentTime;
+        if (video.currentTime < 10) 
+        {
+            lyrics.innerHTML = "<h2> Hush Hush Hush Here Comes The Bogey Man</h2>";
+        }
+        else if (video.currentTime > 10 && video.currentTime < 14)
+        {
+            lyrics.innerHTML = "<h2>Children have You ever met the Bogeyman before</h2>";
+        }
+
+    //false);
+
 </script>
 </body>
 </html>
