@@ -1,1 +1,16 @@
-style
+#title{
+	color:teal;
+	text-align: center;
+	font: verdana;
+	font-weight: 900; 
+}
+
+#a_classic{
+	display: block;
+	margin: 0 auto;
+}
+
+h2{
+	color: lightseagreen;
+	text-align: center;
+}
