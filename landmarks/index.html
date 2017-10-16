@@ -1,0 +1,18 @@
+<!doctype html>
+
+<html>
+<head>
+<title>Where Am I?</title>
+<link rel="stylesheet" href="gmap_style.css" />
+<script scr="script.js" async></script>
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUQjh7MyRdofLix9B0ynnXOc56tRp-tZ8&callback=initMap">
+    </script>
+<div id="map"></div>
+</head>
+
+<body onload="getLocation()">
+  <h1>Where Am I</h1>
+  <div id="location">Trying to determine location...</div>
+</body>
+</html>
