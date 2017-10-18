@@ -1,25 +1,36 @@
 var map;
 var myLat = 0;
 var myLng = 0;
-var request = new XMLHttpRequest();
-var myOptions = {
+getMyPosition();
+var marker;
+
+function initMap(){
+	var myOptions = {
     zoom: 13, // The larger the zoom number, the bigger the zoom
     center: me,
     mapTypeId: google.maps.MapTypeId.ROADMAP
-};
-
+	};
+	infowindow = new google.maps.InfoWindow();
+	map = new google.maps.Map(document.getElementById("map"), myOptions);
+	console.log("making requests");
+	makeRequests();
+}
 
 function getMyPosition(){
     if (navigator.geolocation){
-	navigator.geolocation.getCurrentPosition(function(somePos) {
-		myLatlat = somePos.coords.latitude;
-		myLng = somePos.coords.longitude;
+		navigator.geolocation.getCurrentPosition(function(position) {
+		myLat = position.coords.latitude;
+		myLng = position.coords.longitude;
+		me = new google.maps.LatLng(myLat, myLng);
+		initMap();
+		console.log(myLat);
+		console.log(myLng);
 		renderMap();
-	    }
+	    });
 	    }
 	else {
-	    alert("Geolocation is not supported by your web browser.  What a shame!");
-	});
+	    alert("Geolocation is not supported by your web browser.");
+	}
 }
 
 function renderMap()
@@ -43,23 +54,56 @@ function renderMap()
 	});
 }
 
-
-    var lat = -99999;
-	var lng = -99999;
-
-function getLocation() {
-    console.log("Hit me 1");
-    navigator.geolocation.getCurrentPosition(function(somePos) {
-	    console.log("Hit me 2");
-	    lat = somePos.coords.latitude;
-	    lng = somePos.coords.longitude;
-	    console.log(somePos.coords.altitude);
-	    printLocation();
-	});
-    console.log("Hit me 3");
+function makeRequests()
+{
+	request = new XMLHttpRequest('u1QcvwrF', myLat, myLng);
+	request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	request.onreadystatechange = function() {//Call a function when the state changes.
+    if(request.readyState == 4 && request.status == 200) {
+        alert(request.responseText);
+        parseData();
+    }
+	}
+	request.send('login=u1QcvwrF&lat='+myLat+'&lng='+myLng);
+	//request.responseText;
 }
 
-function printLocation() {
-    elem = document.getElementById("location");
-    elem.innerHTML = '<p class="fun">' + lat + ", " + lng + "</p>";
+function parseData()
+{
+	//console.log(rawData);
+	locations = JSON.parse(request.responseText);
+	console.log(locations);
+	output = "<ul>";
+	for (count = 0; count < locations.length; count++) {
+	output += "<li>" + locations[count]+ " => " + locations[count]+ "</li>";
+	}
+	output += "</ul>";
+	document.getElementById("locations").innerHTML = output;
+	console.log(output);
+	//console.log(locations.length);
+	addLocations();
 }
+
+function addLocations()
+{
+	//newMarkers{
+
+	//}
+	//console.log(locations.people);
+	console.log(locations.people[0].lat);
+	for (var person in locations.people){
+		console.log(person);
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations.people[person].lat, location.people[person].lng),
+			title: "Hooray"
+		});
+		marker.setMap(map);
+	}
+		console.log(locations.people[person]);
+		//console.log(locations.people.id);
+	//	for (var person in locations.people.lat)
+			
+}
+
+
