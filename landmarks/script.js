@@ -75,10 +75,7 @@ function parseData()
 	locations = JSON.parse(request.responseText);
 	console.log(locations);
 	output = "<ul>";
-	for (count = 0; count < locations.length; count++) {
-	output += "<li>" + locations[count]+ " => " + locations[count]+ "</li>";
-	}
-	output += "</ul>";
+
 	document.getElementById("locations").innerHTML = output;
 	console.log(output);
 	//console.log(locations.length);
