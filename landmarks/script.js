@@ -10,7 +10,6 @@ function initMap(){
     center: me,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
-	console.log(myLat + ", " + myLng)
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	makeRequests();
 }
@@ -24,7 +23,7 @@ function getMyPosition(){
 		initMap();
 		renderMap();
 	    });
-	    }
+	}
 	else {
 	    alert("Geolocation is not supported by your web browser.");
 	}
@@ -104,10 +103,15 @@ function addLandmarks()
 		url: "pawprint_icon.png",
 		scaledSize: new google.maps.Size(50, 50)
 	};
+	var smallest_distance = 12450; //Largest possible distance on earth
 	for (var landmark in locations.landmarks){
 		coord = new google.maps.LatLng(locations.landmarks[landmark].geometry.coordinates[1], locations.landmarks[landmark].geometry.coordinates[0]);
 		distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, coord)/1609.344;
 		if (distance_from <= 1){
+			if (distance_from < smallest_distance){
+				smallest_distance = distance_from;
+				closest_landmark = coord;
+			}
 			console.log(locations.landmarks[landmark].geometry.coordinates[0]);
 			marker = new google.maps.Marker({
 				position: coord,
@@ -117,18 +121,37 @@ function addLandmarks()
 				details: locations.landmarks[landmark].properties.Details
 			});
 			//console.log (locations.landmarks[landmark].Location_Name)
-
 			google.maps.event.addListener(marker, 'click', function (){
-           	distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
-           	contentString = '</p><p>details: ' + this.details + '<p/>'
+  	         	//distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
+  
+           		contentString = '</p><p>details: ' + this.details + '<p/>'
 
-           	infowindow = new google.maps.InfoWindow({
-				content: contentString
-			});
-            infowindow.open(map, this);
+           		infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+            	infowindow.open(map, this);
         });
 		}
 	}
+	addPolyline();
+}
+
+function addPolyline(){
+	var two_points = [
+		me,
+		closest_landmark
+	];
+	console.log(two_points);
+	var line = new google.maps.Polyline({
+    path: two_points,
+    geodesic: true,
+    strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+ 	});
+ 	line.setMap(map);
+
+
 }
 
 
