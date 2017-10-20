@@ -61,7 +61,7 @@ function makeRequests()
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = function() {//Call a function when the state changes.
     if(request.readyState == 4 && request.status == 200) {
-        alert(request.responseText);
+        //alert(request.responseText);
         parseData();
     }
 	}
@@ -79,28 +79,27 @@ function parseData()
 	document.getElementById("locations").innerHTML = output;
 	console.log(output);
 	//console.log(locations.length);
-	addLocations();
+	addMarkers();
 }
 
-function addLocations()
+function addMarkers()
 {
 	//newMarkers{
 
 	//}
 	//console.log(locations.people);
-	console.log(locations.people[0].lat);
 	for (var person in locations.people){
-		console.log(person);
 		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(locations.people[person].lat, location.people[person].lng),
-			title: "Hooray"
+			position: new google.maps.LatLng(locations.people[person].lat, locations.people[person].lng),
+			title: "Hooray",
+			map:map
 		});
-		marker.setMap(map);
+		//marker.setMap(map);
 	}
-		console.log(locations.people[person]);
 		//console.log(locations.people.id);
 	//	for (var person in locations.people.lat)
 			
 }
+
 
 
