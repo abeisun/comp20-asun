@@ -52,6 +52,10 @@ function renderMap()
 	    infowindow.setContent(marker.title);
 	    infowindow.open(map, marker);
 	});
+	google.maps.event.addListener(marker, 'click', function () {
+                  infoWindow.setContent(this.title);
+                   infoWindow.open(map, this);
+                            });
 }
 
 function makeRequests()
@@ -88,17 +92,33 @@ function addMarkers()
 
 	//}
 	//console.log(locations.people);
+	var image = {
+		url: "cat_icon.png",
+		scaledSize: new google.maps.Size(50, 50)
+	};
+	//var image = "cat_icon.png";
 	for (var person in locations.people){
 		marker = new google.maps.Marker({
 			position: new google.maps.LatLng(locations.people[person].lat, locations.people[person].lng),
 			title: "Hooray",
-			map:map
+			map:map,
+			icon: image
 		});
 		//marker.setMap(map);
 	}
 		//console.log(locations.people.id);
 	//	for (var person in locations.people.lat)
+		google.maps.event.addListener(marker, 'click', function () {
+                  infoWindow.setContent(this.title);
+                   infoWindow.open(map, this);
+                            });
+	makeClickable();
 			
+}
+
+function makeClickable(){
+	    // Open info window on click of marker
+
 }
 
 
