@@ -63,9 +63,6 @@ function makeRequests()
 function parseData()
 {
 	locations = JSON.parse(request.responseText);
-	output = "<ul>";
-
-	document.getElementById("locations").innerHTML = output;
 	addMarkers();
 }
 
@@ -83,9 +80,6 @@ function addMarkers()
 			icon: image,
 			login: locations.people[person].login
 		});
-		
-		//marker.setMap(map);
-			//	for (var person in locations.people.lat)
 
 		google.maps.event.addListener(marker, 'click', function (){
                  // infowindow.setContent(this.content);
@@ -98,6 +92,11 @@ function addMarkers()
         });
 	}
 			
+}
+
+function addLandmarks()
+{
+	
 }
 
 
