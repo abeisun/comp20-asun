@@ -10,7 +10,7 @@ function initMap(){
     center: me,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
-	infowindow = new google.maps.InfoWindow();
+	
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	console.log("making requests");
 	makeRequests();
@@ -46,16 +46,6 @@ function renderMap()
 	    title: "Here I Am!"
 	});
     marker.setMap(map);
-    
-    // Open info window on click of marker
-    google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.setContent(marker.title);
-	    infowindow.open(map, marker);
-	});
-	google.maps.event.addListener(marker, 'click', function () {
-                  infoWindow.setContent(this.title);
-                   infoWindow.open(map, this);
-                            });
 }
 
 function makeRequests()
@@ -104,14 +94,22 @@ function addMarkers()
 			map:map,
 			icon: image
 		});
+		
 		//marker.setMap(map);
+			//	for (var person in locations.people.lat)
+		contentString = "hello";
+
+		google.maps.event.addListener(marker, 'click', function (){
+                 // infowindow.setContent(this.content);
+           	distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
+           	infowindow = new google.maps.InfoWindow({
+			content: distance_from.toString()
+		});
+            infowindow.open(map, this);
+        });
 	}
 		//console.log(locations.people.id);
-	//	for (var person in locations.people.lat)
-		google.maps.event.addListener(marker, 'click', function () {
-                  infoWindow.setContent(this.title);
-                   infoWindow.open(map, this);
-                            });
+
 	makeClickable();
 			
 }
