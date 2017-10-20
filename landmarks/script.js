@@ -87,11 +87,10 @@ function addMarkers()
 		});
 
 		google.maps.event.addListener(marker, 'click', function (){
-                 // infowindow.setContent(this.content);
            	distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
-           	contentString = '<p class="login">'+this.login+'<p/><p class="distance">' + distance_from.toString() + "h<p/>";
+           	contentString = '<p class="login">'+this.login+'<p/><p class="distance">is ' + distance_from.toString() + " miles from you<p/>";
            	infowindow = new google.maps.InfoWindow({
-			content: contentString
+				content: contentString
 			});
             infowindow.open(map, this);
         });
@@ -106,13 +105,29 @@ function addLandmarks()
 		scaledSize: new google.maps.Size(50, 50)
 	};
 	for (var landmark in locations.landmarks){
-		console.log(locations.landmarks[landmark].geometry.coordinates[0]);
-		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(locations.landmarks[landmark].geometry.coordinates[1], locations.landmarks[landmark].geometry.coordinates[0]),
-			map:map,
-			icon: image,
-			//login: locations.people[person].login
-		});
+		coord = new google.maps.LatLng(locations.landmarks[landmark].geometry.coordinates[1], locations.landmarks[landmark].geometry.coordinates[0]);
+		distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, coord)/1609.344;
+		if (distance_from <= 1){
+			console.log(locations.landmarks[landmark].geometry.coordinates[0]);
+			marker = new google.maps.Marker({
+				position: coord,
+				map:map,
+				icon: image,
+				Location_Name: locations.landmarks[landmark].properties.Location_Name,
+				details: locations.landmarks[landmark].properties.Details
+			});
+			//console.log (locations.landmarks[landmark].Location_Name)
+
+			google.maps.event.addListener(marker, 'click', function (){
+           	distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
+           	contentString = '</p><p>details: ' + this.details + '<p/>'
+
+           	infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+            infowindow.open(map, this);
+        });
+		}
 	}
 }
 
