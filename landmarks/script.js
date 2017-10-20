@@ -10,7 +10,7 @@ function initMap(){
     center: me,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
-	
+	console.log(myLat + ", " + myLng)
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	makeRequests();
 }
@@ -37,10 +37,14 @@ function renderMap()
     // Update map and go there...
     map.panTo(me);
   
+  	var image = {
+		url: "cat_icon.png",
+		scaledSize: new google.maps.Size(50, 50)
+	};
     // Create a marker
     marker = new google.maps.Marker({
 	    position: me,
-	    title: "Here I Am!"
+	    icon: image
 	});
     marker.setMap(map);
 }
@@ -52,7 +56,7 @@ function makeRequests()
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = function() {//Call a function when the state changes.
     if(request.readyState == 4 && request.status == 200) {
-        alert(request.responseText);
+       // alert(request.responseText);
         parseData();
     }
 	}
@@ -63,13 +67,14 @@ function makeRequests()
 function parseData()
 {
 	locations = JSON.parse(request.responseText);
+	console.log(locations);
 	addMarkers();
 }
 
 function addMarkers()
 {
 	var image = {
-		url: "cat_icon.png",
+		url: "dog_icon.png",
 		scaledSize: new google.maps.Size(50, 50)
 	};
 	//var image = "cat_icon.png";
@@ -91,12 +96,24 @@ function addMarkers()
             infowindow.open(map, this);
         });
 	}
-			
+	addLandmarks();
 }
 
 function addLandmarks()
 {
-	
+	var image = {
+		url: "pawprint_icon.png",
+		scaledSize: new google.maps.Size(50, 50)
+	};
+	for (var landmark in locations.landmarks){
+		console.log(locations.landmarks[landmark].geometry.coordinates[0]);
+		marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations.landmarks[landmark].geometry.coordinates[1], locations.landmarks[landmark].geometry.coordinates[0]),
+			map:map,
+			icon: image,
+			//login: locations.people[person].login
+		});
+	}
 }
 
 
