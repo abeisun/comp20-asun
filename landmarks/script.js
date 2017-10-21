@@ -66,7 +66,6 @@ function makeRequests()
 function parseData()
 {
 	locations = JSON.parse(request.responseText);
-	console.log(locations);
 	addMarkers();
 }
 
@@ -112,7 +111,6 @@ function addLandmarks()
 				smallest_distance = distance_from;
 				closest_landmark = coord;
 			}
-			console.log(locations.landmarks[landmark].geometry.coordinates[0]);
 			marker = new google.maps.Marker({
 				position: coord,
 				map:map,
@@ -120,7 +118,6 @@ function addLandmarks()
 				Location_Name: locations.landmarks[landmark].properties.Location_Name,
 				details: locations.landmarks[landmark].properties.Details
 			});
-			//console.log (locations.landmarks[landmark].Location_Name)
 			google.maps.event.addListener(marker, 'click', function (){
   	         	//distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
   
@@ -141,7 +138,6 @@ function addPolyline(){
 		me,
 		closest_landmark
 	];
-	console.log(two_points);
 	var line = new google.maps.Polyline({
     path: two_points,
     geodesic: true,
