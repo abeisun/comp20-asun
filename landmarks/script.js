@@ -121,7 +121,7 @@ function addLandmarks()
 			google.maps.event.addListener(marker, 'click', function (){
   	         	//distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
   
-           		contentString = '</p><p>details: ' + this.details + '<p/>'
+           		contentString = '<p>' + this.details + '</p>'
 
            		infowindow = new google.maps.InfoWindow({
 					content: contentString
