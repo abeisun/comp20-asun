@@ -86,7 +86,7 @@ function addMarkers()
 
 		google.maps.event.addListener(marker, 'click', function (){
            	distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, this.position)/1609.344;
-           	contentString = '<p class="login">'+this.login+'<p/><p class="distance">is ' + distance_from.toString() + " miles from you<p/>";
+           	contentString = '<p class="login">'+this.login+'<p/><p>is <span class="distance"> ' + distance_from.toString() + "</span> miles away<p/>";
            	infowindow = new google.maps.InfoWindow({
 				content: contentString
 			});
