@@ -6,6 +6,13 @@ html, body {
     margin: 0;
     padding: 0;
   }
+h1 {
+	font-family: "Times New Roman", Georgia, Serif;
+}
+
+body{
+	background-color: beige;
+}
 .login {
 	font-weight: bold;
 }
