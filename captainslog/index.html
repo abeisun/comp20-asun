@@ -9,10 +9,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         // Your work will be done here...
+        function store(){
+            var input=document.getElementById("msg");
+            localStorage.setItem("msg", input.value);
+        }
+
         $(document).ready(function(){
             $("#msg").keypress(function(e){
-                if(e.which == 13)
-                    $("#log").html("Hellp");
+                var storedValue = localStorage.getItem("msg");
+                if(e.which == 13){
+                    output = Date() + " - " + document.getElementById("msg").value;
+                    $("#log").html(output);
+                    $("#msg").val("");
+                    store();
+                    //document.getElementById("textfield2").value = "";
+                }
             });
         });
     </script>
