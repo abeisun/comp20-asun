@@ -10,18 +10,35 @@
     <script>
         // Your work will be done here...
         function store(){
-            var input=document.getElementById("msg");
-            localStorage.setItem("msg", input.value);
+            localStorage.setItem("msg", JSON.stringify(storedValues));
+        }
+        function print(){
+            var output = ''; 
+            for (var key in localStorage) {
+                output = "<br />"+output+ "<br />"+(localStorage[key])+ "<br />";
+            }
+            $("#log").html(output); 
+
+            $('#DivToPrintOut').html(output);
+
         }
 
         $(document).ready(function(){
+            storedValues = JSON.parse(localStorage.getItem("msg")) || [];
+            //$("#log").html(storedValues);
+            print();
             $("#msg").keypress(function(e){
-                var storedValue = localStorage.getItem("msg");
+                //callback(storedValues)
+                //var storedValues = [];
+                console.log(storedValues);
                 if(e.which == 13){
-                    output = Date() + " - " + document.getElementById("msg").value;
-                    $("#log").html(output);
+                    input = Date() + " - " + document.getElementById("msg").value;
+                    //$("#log").html(output);
                     $("#msg").val("");
+                    storedValues.unshift(input);
                     store();
+                    $("#log").html("");
+                    print();
                     //document.getElementById("textfield2").value = "";
                 }
             });
