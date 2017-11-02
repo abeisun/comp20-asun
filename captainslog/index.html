@@ -15,7 +15,9 @@
         function print(){
             var output = ''; 
             for (var key in localStorage) {
-                output = "<br />"+output+ "<br />"+(localStorage[key])+ "<br />";
+                output = output+(localStorage[key]);
+               // output.toString().replace(/"/g, '');
+                //output.toString().replace(/,/g, '');
             }
             $("#log").html(output); 
 
@@ -30,9 +32,8 @@
             $("#msg").keypress(function(e){
                 //callback(storedValues)
                 //var storedValues = [];
-                console.log(storedValues);
                 if(e.which == 13){
-                    input = Date() + " - " + document.getElementById("msg").value;
+                    input = +Date() + " - " + document.getElementById("msg").value +"<br>";
                     //$("#log").html(output);
                     $("#msg").val("");
                     storedValues.unshift(input);
