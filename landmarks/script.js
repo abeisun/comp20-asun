@@ -51,7 +51,7 @@ function renderMap()
 function makeRequests()
 {
 	request = new XMLHttpRequest('u1QcvwrF', myLat, myLng);
-	request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+	request.open("POST", "https://lit-falls-27393.herokuapp.com/sendLocation", true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = function() {//Call a function when the state changes.
     if(request.readyState == 4 && request.status == 200) {
