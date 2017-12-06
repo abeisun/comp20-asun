@@ -10,7 +10,20 @@
   	student's web application</p>
   <h1>Methodology</h1>
   	<p>To test for Cross Site Scripting vulnerabilities, I used curl to inject
-  	JavaScript as request parameters in /sendLocation. I used the line &ltscript&gtwindow.location.replace('http://stackoverflow.com');&lt/script&gt</p>
+  	JavaScript as request parameters in /sendLocation. I used the line: 
+  	"&ltscript&gtwindow.location.replace('http://stackoverflow.com');&lt/script&gt" 
+  	as my login.</p>
+  	<p>I also tested to see if, using the MongoDB not equal operator ($ne), /checkin.json 
+  	would send all the information of the users with a login not equal to the input
+  	(for example, if I typed https://lit-falls-27393.herokuapp.com/checkins.json?login[$ne]=angela
+  	into my browser, the web app would send all the information of users who do not have the
+  	login "angela", which poses a security risk, as that information includes the location
+  	of those people.</p>
+  	<p>Finally, by looking at my partner's code, I saw that using POST for /sendLocation, there's
+  	the line "response.header("Access-Control-Allow-Origin", "*");" The "*" asterisk means that
+  	anyone could access /sendLocation.</p>
+  <h1>Abstract of Findings</h1>
+
 </body>
 
 </html>
