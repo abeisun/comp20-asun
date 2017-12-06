@@ -103,6 +103,7 @@ function addLandmarks()
 		scaledSize: new google.maps.Size(50, 50)
 	};
 	var smallest_distance = 12450; //Largest possible distance on earth
+	//console.log(locations.landmarks);
 	for (var landmark in locations.landmarks){
 		coord = new google.maps.LatLng(locations.landmarks[landmark].geometry.coordinates[1], locations.landmarks[landmark].geometry.coordinates[0]);
 		distance_from = google.maps.geometry.spherical.computeDistanceBetween(me, coord)/1609.344;
