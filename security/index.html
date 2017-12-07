@@ -19,12 +19,10 @@
   	<p>When I injected the line
   	"&ltscript&gtwindow.location.replace('http://stackoverflow.com');&lt/script&gt" 
   	as my login, the page redirected to stackoverflow.com.</p>
-  	<p>I also tested to see if, using the MongoDB not equal operator ($ne), /checkin.json 
-  	would send all the information of the users with a login not equal to the input
-  	(for example, if I typed https://lit-falls-27393.herokuapp.com/checkins.json?login[$ne]=angela
-  	into my browser, the web app would send all the information of users who do not have the
-  	login "angela", which poses a security risk, as that information includes the location
-  	of those people.</p>
+  	<p>I found that I could easily access the login and location of other users by using my 
+  	browser and typing in /checkin.json?login[$ne]=username. The page then printed out the 
+  	information of every other user that did not have the login "username," which is a severe
+  	privacy issue.</p>
   	<p>Finally, by looking at my partner's code, I saw that using POST for /sendLocation, there's
   	the line "response.header("Access-Control-Allow-Origin", "*");" The "*" asterisk means that
   	anyone could access /sendLocation.</p>
@@ -39,7 +37,12 @@
 	   is a high severity issue because someone could easily inject JavaScript that redirects
 	   to another page. The user could be unaware of this and enter in private information, which
 	   would give sensitive data to a hacker.</p>
-	   
+	   <p>I also tested to see if, using the MongoDB not equal operator ($ne), /checkin.json 
+		would send all the information of the users with a login not equal to the input
+	  	(for example, if I typed https://lit-falls-27393.herokuapp.com/checkins.json?login[$ne]=angela
+	  	into my browser, the web app would send all the information of users who do not have the
+	  	login "angela", which poses a security risk, as that information includes the location
+	  	of those people.</p>
 
 </body>
 
