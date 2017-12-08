@@ -7,7 +7,7 @@
 <body>
   <h1>Introduction</h1>
   	<p>I was hired to find at least three security vulnerabilities in another
-  	student's web application</p>
+  	student's web application.</p>
   <h1>Methodology</h1>
   	<p>To test for Cross Site Scripting vulnerabilities, I used curl to inject
   	JavaScript as a request parameter to see if the browser would run it.</p>
@@ -45,6 +45,12 @@
 	  	login "angela", which poses a security risk, as that information includes the location
 	  	of those people.</p>
 	  <img src="Mongo_ne_example.png" alt="Proof of Mongo not equal operator vulnerability">
+	 	<p>Finally, I found the issue of allowing Cross-Origin Resource Sharing (CORS), which allows
+	 	any site to make a request. This wouldn't be a security issue if it weren't for the fact that
+	 	the site stores information that should be private, such as login and location. Because 
+	 	this site is designed to allow access to /sendLocation only by using XHR requests, there is
+	 	no need for CORS, and especially if there is verification involved, the websote could be
+	 	vulnerable to Cross-Site Request Forgery.</p>
 
 </body>
 
