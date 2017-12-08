@@ -12,7 +12,8 @@
   	<p>To test for Cross Site Scripting vulnerabilities, I used curl to inject
   	JavaScript as a request parameter to see if the browser would run it.</p>
   	<p>I also tested to see if there was any security in place to maintain privacy. I used the
-  	MongoDB not equal ($ne) operator as one way of testing for this</p>
+  	I tested to see if a noSQL injection was possible with the MongoDB not equal ($ne) operator
+  	as one way of testing for this</p>
   	<p>I could test for those vulnerabilities without looking at my partner's code and using
   	curl or a browser. To find the rest of the flaws in my partner's code, I read the code itself.</p>
   <h1>Abstract of Findings</h1>
@@ -43,16 +44,24 @@
 	  	(for example, if I typed https://lit-falls-27393.herokuapp.com/checkins.json?login[$ne]=angela
 	  	into my browser, the web app would send all the information of users who do not have the
 	  	login "angela", which poses a security risk, as that information includes the location
-	  	of those people.</p>
+	  	of those people. This risk is severe as well. Not only cou</p>
 	  <img src="Mongo_ne_example.png" alt="Proof of Mongo not equal operator vulnerability">
+	  <p>A way to fix this is using mongo-sanitize, which would strip out any keys starting with "$." 
+	  Also, using Mongoose would solve the problem, as it automatically converts passed in objects to 
+	  strings.
+	  <img src="sanitize.png" alt="How to use mongo-sanitize">
 	 	<p>Finally, I found the issue of allowing Cross-Origin Resource Sharing (CORS), which allows
 	 	any site to make a request. This wouldn't be a security issue if it weren't for the fact that
 	 	the site stores information that should be private, such as login and location. Because 
 	 	this site is designed to allow access to /sendLocation only by using XHR requests, there is
 	 	no need for CORS, and especially if there is verification involved, the websote could be
 	 	vulnerable to Cross-Site Request Forgery. This is a severe vulnerability because this
-	 	allows a third party to act as a user and target state-change requests.</p>
+	 	allows a third party to act as a user and target state-change requests. </p>
 	  <img src="cors.png" alt="stackoverflow explanation of CORS and its security risks">
+	  <p> This could be solved, at least from what I've researched, by having the user send a preflighted 
+	  request, as this web app takes POST requests from the user. The client-side sends POST request that
+	  includes a login and location, and the server authenticates it.
+	   <img src="preflight.png" alt="Explanation of how to combat CORS security risks">
 
 </body>
 
