@@ -64,7 +64,20 @@
 	  request, as this web app takes POST requests from the user. The client-side sends aPOST request that
 	  includes a login and location, and the server authenticates it.</p>
 	   <img src="preflight.png" alt="Explanation of how to combat CORS security risks">
-
+	<h1>Conclusions</h1>
+		<p>I would recommend the creator of the web app to follow the above three security recommendations.
+		Furthermore, it does not seem like the creator verifies any sort of login info, which is dangerous
+		considering users are inputting their location into the server. I would recommend implementing
+		that as well as the above changes. Also, I would limit the number of possible inputs into the
+		database, just because the user will probably be charged if there are too many requests or if
+		someone tries to overload the server.</p>
+	<h2>References</h2>
+		<ul>
+			<li><a href="XSS prevention">https://www.npmjs.com/package/xss</a></li>
+			<li><a href="noSQL injection resourse (Zanon)">https://zanon.io/posts/nosql-injection-in-mongodb</a></li>
+			<li><a href="CORS reference">https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/</a></li>
+			<li><a href="CORS reference (stackoverflow)">https://stackoverflow.com/questions/12001269/what-are-the-security-risks-of-setting-access-control-allow-origin</a></li>
+		</ul>
 </body>
 
 </html>
