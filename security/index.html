@@ -37,14 +37,16 @@
 	   does not strip it of certain characters. This occurs on heroku.com/sendLocation. This
 	   is a high severity issue because someone could easily inject JavaScript that redirects
 	   to another page. The user could be unaware of this and enter in private information, which
-	   would give sensitive data to a hacker.</p>
+	   would give sensitive data to a hacker. To solve this, the web app should sanitize characters
+	   related to HTML input, such as "<" or ">" or "/".</p>
 	   <img src="script_injection.png" alt="Proof of script injection">
 	   <p>I also tested to see if, using the MongoDB not equal operator ($ne), /checkin.json 
 		would send all the information of the users with a login not equal to the input
 	  	(for example, if I typed https://lit-falls-27393.herokuapp.com/checkins.json?login[$ne]=angela
 	  	into my browser, the web app would send all the information of users who do not have the
 	  	login "angela", which poses a security risk, as that information includes the location
-	  	of those people. This risk is severe as well. Not only cou</p>
+	  	of those people. This risk is medium, as accessing the website itself (https://lit-falls-27393.herokuapp.com/)
+	  	already returns the login and locations of these users, but this is a security vulnerability nontetheless.</p>
 	  <img src="Mongo_ne_example.png" alt="Proof of Mongo not equal operator vulnerability">
 	  <p>A way to fix this is using mongo-sanitize, which would strip out any keys starting with "$." 
 	  Also, using Mongoose would solve the problem, as it automatically converts passed in objects to 
@@ -59,8 +61,8 @@
 	 	allows a third party to act as a user and target state-change requests. </p>
 	  <img src="cors.png" alt="stackoverflow explanation of CORS and its security risks">
 	  <p> This could be solved, at least from what I've researched, by having the user send a preflighted 
-	  request, as this web app takes POST requests from the user. The client-side sends POST request that
-	  includes a login and location, and the server authenticates it.
+	  request, as this web app takes POST requests from the user. The client-side sends aPOST request that
+	  includes a login and location, and the server authenticates it.</p>
 	   <img src="preflight.png" alt="Explanation of how to combat CORS security risks">
 
 </body>
