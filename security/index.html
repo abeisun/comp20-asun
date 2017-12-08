@@ -50,7 +50,9 @@
 	 	the site stores information that should be private, such as login and location. Because 
 	 	this site is designed to allow access to /sendLocation only by using XHR requests, there is
 	 	no need for CORS, and especially if there is verification involved, the websote could be
-	 	vulnerable to Cross-Site Request Forgery.</p>
+	 	vulnerable to Cross-Site Request Forgery. This is a severe vulnerability because this
+	 	allows a third party to act as a user and target state-change requests.</p>
+	  <img src="cors.png" alt="stackoverflow explanation of CORS and its security risks">
 
 </body>
 
